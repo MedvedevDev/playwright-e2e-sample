@@ -10,9 +10,6 @@ export class DeliveryDetails {
     this.postcodeInput = page.getByPlaceholder("Post code");
     this.cityInput = page.getByPlaceholder("City");
     this.countryDropdown = page.locator('[data-qa="country-dropdown"]');
-    this.saveDetailsButton = page.getByRole("button", {
-      name: "Save address for next time",
-    });
 
     // Adress container fields
     this.savedDetailsContainer = page.locator(
@@ -24,6 +21,14 @@ export class DeliveryDetails {
     this.savedPostcode = page.locator('[data-qa="saved-address-postcode"]');
     this.savedCity = page.locator('[data-qa="saved-address-city"]');
     this.savedCountry = page.locator('[data-qa="saved-address-country"]');
+
+    // Buttons
+    this.saveDetailsButton = page.getByRole("button", {
+      name: "Save address for next time",
+    });
+    this.continueToPaymentButton = page.getByRole("button", {
+      name: "Continue to payment",
+    });
   }
 
   fillDetails = async (deliveryDetails) => {
@@ -67,6 +72,10 @@ export class DeliveryDetails {
     expect(await this.savedCountry.first().innerText()).toBe(
       await this.countryDropdown.inputValue()
     );
-    await this.page.pause();
+  };
+
+  continueToPayment = async () => {
+    await this.continueToPaymentButton.click();
+    await this.page.waitForURL(/\/payment/, { timeout: 3000 });
   };
 }
