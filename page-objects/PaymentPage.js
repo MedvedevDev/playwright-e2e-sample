@@ -13,10 +13,17 @@ export class PaymentPage {
     );
     this.discountMessage = page.locator('[data-qa="discount-active-message"]');
 
+    // Credit card form fields
+    this.creditCardOwnerInput = page.getByPlaceholder("Credit card owner");
+    this.creditCardNumberInput = page.getByPlaceholder("Credit card number");
+    this.creditCardValidUntilInput = page.getByPlaceholder("Valid until");
+    this.creditCardCvcInput = page.getByPlaceholder("Credit card CVC");
+
     // Buttons
     this.activateDiscountButton = page.locator(
       '[data-qa="submit-discount-button"]'
     );
+    this.payButton = page.locator('[data-qa="pay-button"]');
   }
 
   activateDiscount = async () => {
@@ -36,6 +43,11 @@ export class PaymentPage {
     // await this.discountInput.pressSequentially(code, { delay: 1000 });
     // expect(await this.discountInput.inputValue()).toBe(code);
 
+    // Discount message and amount are not shown before clicking
+    expect(await this.discountMessage.isVisible()).toBe(false);
+    expect(await this.discountedValue.isVisible()).toBe(false);
+
+    // Activate discount by clicking the button
     await this.activateDiscountButton.click();
 
     // Check that "Discount activated" text is displayed
@@ -52,5 +64,19 @@ export class PaymentPage {
     const discountedValueNumber = parseInt(discountedValueClear);
 
     expect(discountedValueNumber).toBeLessThan(totalValueNumber);
+  };
+
+  fillPaymentDetails = async (paymentDetails) => {
+    await this.creditCardOwnerInput.fill(paymentDetails.owner);
+    await this.creditCardNumberInput.fill(paymentDetails.number);
+    await this.creditCardValidUntilInput.fill(paymentDetails.validUntil);
+    await this.creditCardCvcInput.fill(paymentDetails.cvc);
+  };
+
+  completePayment = async () => {
+    await this.payButton.waitFor();
+
+    await this.payButton.click();
+    await this.page.waitForURL(/\/thank-you/, { timeout: 3000 });
   };
 }
