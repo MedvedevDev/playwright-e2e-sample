@@ -4,7 +4,7 @@ import { getLoginToken } from "../api-calls/getLoginToken";
 import { addCookieContext } from "../utils/addCookieContext";
 import { admin } from "../data/loginDetails";
 
-test.only("My account using cookie injection and mocking network request", async ({
+test("My account using cookie injection and mocking network request", async ({
   page,
 }) => {
   // Make a request to get login token
@@ -46,5 +46,4 @@ test.only("My account using cookie injection and mocking network request", async
 
   await myAccount.visit();
   await myAccount.waitForPageHeading();
-  await page.pause();
 });
