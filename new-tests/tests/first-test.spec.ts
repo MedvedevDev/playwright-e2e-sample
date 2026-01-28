@@ -19,3 +19,57 @@ test("User facing locators", async ({ page }) => {
 
   await page.getByTestId("testid-test").click();
 });
+
+test("Locating child elements", async ({ page }) => {
+  await page.locator('nb-card-body nb-radio :text-is("Option 1")').click();
+
+  // chaining locators one by one
+  await page
+    .locator("nb-card-body")
+    .locator("nb-radio")
+    .locator(':text-is("Option 2")')
+    .click();
+
+  await page
+    .locator("nb-card")
+    .getByRole("button", { name: "Sign in" })
+    .first()
+    .click();
+
+  // nth element
+  await page.locator("nb-card").nth(4).getByRole("button").click();
+});
+
+test("Locating parent elements", async ({ page }) => {
+  await page
+    .locator("nb-card", { hasText: "Block form" })
+    .getByRole("textbox", { name: "Last Name" })
+    .fill("My Last Name");
+
+  await page
+    .locator("nb-card", { has: page.locator("#inputWebsite") })
+    .getByPlaceholder("Website")
+    .fill("asdfsd@fdsfsd.cc");
+
+  // filter method - hasText
+  await page
+    .locator("nb-card")
+    .filter({ hasText: "Horizontal form" })
+    .getByRole("textbox", { name: "Email" })
+    .fill("fsdfdsfsd@fdsfsd.cc");
+
+  // filter method - has (locator)
+  await page
+    .locator("nb-card")
+    .filter({ has: page.locator(".status-warning") })
+    .getByRole("textbox", { name: "Password" })
+    .fill("gdfgdfgfdgdf");
+
+  await page
+    .locator("nb-card")
+    .filter({
+      has: page.getByRole("button", { name: "Sign In" }),
+    })
+    .nth(0)
+    .click();
+});
