@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.beforeEach("go to localhost", async ({ page }) => {
   await page.goto("http://localhost:4200");
@@ -72,4 +72,22 @@ test("Locating parent elements", async ({ page }) => {
     })
     .nth(0)
     .click();
+});
+
+test.only("extracting values", async ({ page }) => {
+  // get single value and assert it
+  const basicForm = page.locator("nb-card").filter({ hasText: "Basic form" });
+  const buttonText = await basicForm.locator("button").textContent();
+  expect(buttonText).toEqual("Submit");
+
+  // gett all text values  and assert that at least one is true
+  const allRadioButtonLabels = await page.locator("nb-radio").allTextContents();
+  console.log(allRadioButtonLabels); //[ 'Option 1', 'Option 2', 'Disabled Option' ]
+  expect(allRadioButtonLabels).toContain("Disabled Option");
+
+  // input value
+  const emailField = basicForm.getByRole("textbox", { name: "Email" });
+  await emailField.fill("test@test.com");
+  const emailFieldValue = await emailField.inputValue();
+  expect(emailFieldValue).toEqual("test@test.com");
 });
