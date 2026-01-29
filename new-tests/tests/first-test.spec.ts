@@ -98,10 +98,10 @@ test.only("Assertions", async ({ page }) => {
     .filter({ hasText: "Basic form" })
     .locator("button");
 
-  // LOCATOR ASSERTION - locator to value | Has timeout: up to 5 sec
+  // LOCATOR ASSERTION - locator to value | Default timeout: up to 5 sec
   expect(buttonSubmit).toBeVisible();
 
-  // GENERAL ASSERTION - value to value | No timeout
+  // GENERAL ASSERTION - value to value | Default timeout: up to 30 sec
   const buttonText = await buttonSubmit.textContent();
   expect(buttonText).toEqual("Submit");
 
