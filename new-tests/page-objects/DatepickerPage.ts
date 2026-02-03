@@ -1,12 +1,12 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { HelperBase } from "./HelperBase";
 
-export class DatepickerPage {
-  readonly page: Page;
+export class DatepickerPage extends HelperBase {
   readonly commonCalendarInputField: Locator;
   readonly rangeCalendarInputField: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.commonCalendarInputField = page.getByPlaceholder("Form Picker");
     this.rangeCalendarInputField = page.getByPlaceholder("Range Picker");
   }
@@ -20,6 +20,8 @@ export class DatepickerPage {
     );
 
     await expect(this.commonCalendarInputField).toHaveValue(dateToAssert);
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   // Datepicker With Range

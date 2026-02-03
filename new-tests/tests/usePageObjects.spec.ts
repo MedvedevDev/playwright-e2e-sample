@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import {   test } from "@playwright/test";
 import { NavigationPage } from "../page-objects/NavigationPage";
 import { FormLayoutsPage } from "../page-objects/FormLayoutsPage";
 import { DatepickerPage } from "../page-objects/DatepickerPage";
@@ -34,7 +34,7 @@ test("test datepicker", async ({ page }) => {
   const datepickerPage = new DatepickerPage(page);
 
   await navigation.toDatepickerPage();
+  // test single date picker and range datepicker
   await datepickerPage.selectCommonDatePickerDateFromToday(10);
-
   await datepickerPage.selectDatePickerWithRangeFromToday(6, 10);
 });

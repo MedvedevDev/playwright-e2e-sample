@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
+import { HelperBase } from "./HelperBase";
 
-export class NavigationPage {
-  readonly page: Page;
+export class NavigationPage extends HelperBase {
   readonly formLayoutsMenu: Locator;
   readonly datepickerMenu: Locator;
   readonly smartTableMenu: Locator;
@@ -9,7 +9,7 @@ export class NavigationPage {
   readonly tooltipMenu: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.formLayoutsMenu = page.getByText("Form Layouts");
     this.datepickerMenu = page.getByText("Datepicker");
     this.smartTableMenu = page.getByText("Smart Table");
@@ -20,26 +20,36 @@ export class NavigationPage {
   async toFormLayoutsPage() {
     await this.selectGroupMenuItem("Forms");
     await this.formLayoutsMenu.click();
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   async toDatepickerPage() {
     await this.selectGroupMenuItem("Forms");
     await this.datepickerMenu.click();
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   async toSmartTablePage() {
     await this.page.getByText("Tables & Data").click();
     await this.smartTableMenu.click();
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   async toToastrPage() {
     await this.selectGroupMenuItem("Modal & Overlays");
     await this.toastrMenu.click();
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   async toTooltipPage() {
     await this.selectGroupMenuItem("Modal & Overlays");
     await this.tooltipMenu.click();
+
+    await this.waitForNumberOfSeconds(2);
   }
 
   // helper method
