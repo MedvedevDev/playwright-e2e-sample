@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import { NavigationPage } from "../page-objects/NavigationPage";
 import { FormLayoutsPage } from "../page-objects/FormLayoutsPage";
 import { DatepickerPage } from "../page-objects/DatepickerPage";
+import { faker } from "@faker-js/faker";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200/pages/iot-dashboard");
@@ -20,13 +21,14 @@ test("parametrized methods. submit a form", async ({ page }) => {
   const navigation = new NavigationPage(page);
   const formLayoutsPage = new FormLayoutsPage(page);
 
+  // Generate test-data
+  const fullName = faker.person.fullName();
+  const email = faker.internet.email();
+  const pass = faker.internet.password();
+
   await navigation.toFormLayoutsPage();
-  await formLayoutsPage.submitUsingTheGridForm(
-    "assaas@sasa.s",
-    "sdfdgdsffsdf",
-    "Option 2",
-  );
-  await formLayoutsPage.submitInlineForm("Alex Manad", "fdsfsdfs@fdfsd.", true);
+  await formLayoutsPage.submitUsingTheGridForm(email, pass, "Option 2");
+  await formLayoutsPage.submitInlineForm(fullName, email, true);
 });
 
 test("test datepicker", async ({ page }) => {

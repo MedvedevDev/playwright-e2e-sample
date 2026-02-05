@@ -11,7 +11,8 @@
     "start": "ng serve",
     "pageObjects-chrome": "npx playwright test usePageObjects.spec.ts --project=chromium",
     "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
-    "pageObjects-all": "npm run pageObjects-chrome && npm run pageObjects-firefox"
+    "pageObjects-all": "npm run pageObjects-chrome && npm run pageObjects-firefox",
+    "uiComponents-chrome": "npx playwright test uiComponents.spec.ts --project=chromium"
   },
   "overrides": {
     "stylus": "github:stylus/stylus#0.54.5"
@@ -64,6 +65,7 @@
     "@angular/compiler-cli": "^14.2.12",
     "@angular/language-service": "14.2.12",
     "@compodoc/compodoc": "^1.1.19",
+    "@faker-js/faker": "^10.2.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@playwright/test": "^1.58.0",
     "@types/leaflet": "1.2.3",

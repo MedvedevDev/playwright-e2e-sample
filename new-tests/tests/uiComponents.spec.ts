@@ -52,7 +52,7 @@ test.describe("Form Latouts page", () => {
     // LOCATOR assertion for radio button
     await expect(
       usingTheGrid.getByRole("radio", { name: "Option 2" }),
-    ).not.toBeChecked();
+    ).toBeChecked();
   });
 });
 
@@ -99,7 +99,7 @@ test("list and dropdown", async ({ page }) => {
 
   // verify that theme color is changed to Cosmic
   const header = page.locator("nb-layout-header");
-  await expect(header).toHaveCSS("backgroun d-color", "rgb(50, 50, 89)");
+  await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89)");
 });
 
 test("dialog box and tables", async ({ page }) => {
