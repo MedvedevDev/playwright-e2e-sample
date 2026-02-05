@@ -1,4 +1,4 @@
-import {   test } from "@playwright/test";
+import { test } from "@playwright/test";
 import { NavigationPage } from "../page-objects/NavigationPage";
 import { FormLayoutsPage } from "../page-objects/FormLayoutsPage";
 import { DatepickerPage } from "../page-objects/DatepickerPage";
