@@ -18,7 +18,21 @@ test("datepicker", async ({ page }) => {
   // pick a date in current month
   await currentMonth.getByText("1", { exact: true }).click();
 
-  await expect(calendarInputField).toHaveValue("Jun 1, 2026");
+  // make a string to compare
+  const now = new Date();
+  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const formatted = firstDayOfMonth.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  await expect(calendarInputField).toHaveValue(formatted);
+
+  // make a screenshot
+  await page.screenshot({
+    path: "screenshots/datePicker.png",
+    animations: "disabled",
+  });
 });
 
 test("[ONLY within the current month] dynamically select a date in the datepicker", async ({

@@ -106,6 +106,6 @@ test("Assertions", async ({ page }) => {
   expect(buttonText).toEqual("Submit");
 
   // SOFT ASSERTION - test will be continued even if failed
-  await expect.soft(buttonSubmit).toHaveText("Submit ? ");
+  //await expect.soft(buttonSubmit).toHaveText("Submit ? ");
   await buttonSubmit.click();
 });

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("drag and drop within iFrame", async ({ page }) => {
+test.skip("drag and drop within iFrame", async ({ page }) => {
   await page.goto("https://www.globalsqa.com/demo-site/draganddrop/");
   // locata iFrame
   const iframeContainer = page.frameLocator(

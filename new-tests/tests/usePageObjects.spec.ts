@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import { NavigationPage } from "../page-objects/NavigationPage";
 import { FormLayoutsPage } from "../page-objects/FormLayoutsPage";
 import { DatepickerPage } from "../page-objects/DatepickerPage";
-import { faker } from "@faker-js/faker";
+import { fakerDE as faker } from "@faker-js/faker";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200/pages/iot-dashboard");

@@ -21,6 +21,9 @@ export class DatepickerPage extends HelperBase {
 
     await expect(this.commonCalendarInputField).toHaveValue(dateToAssert);
 
+    // make a screenshot
+    await this.page.screenshot({ path: "screenshots/datePickerObjects.png" });
+
     await this.waitForNumberOfSeconds(2);
   }
 
@@ -30,11 +33,9 @@ export class DatepickerPage extends HelperBase {
     endDayFromToday: number,
   ) {
     await this.rangeCalendarInputField.click();
-    const dateToAssertStart =
-      await this.selectDateInTheCalendar(startDayFromToday);
-    const dateToAssertEnd = await this.selectDateInTheCalendar(endDayFromToday);
 
-    const dateToAssert = `${dateToAssertStart} - ${dateToAssertEnd}`;
+    await this.selectDateInTheCalendar(startDayFromToday);
+    await this.selectDateInTheCalendar(endDayFromToday);
   }
 
   // method to selecet single date in the calendar

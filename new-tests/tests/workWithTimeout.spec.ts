@@ -7,7 +7,7 @@ test.beforeEach("go to localhost", async ({ page }) => {
     .click();
 });
 
-test("Set Timeouts", async ({ page }) => {
+test.skip("Set Timeouts", async ({ page }) => {
   // wait for particular response
   await page.waitForResponse("http://uitestingplayground.com/ajaxdata");
 

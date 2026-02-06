@@ -206,6 +206,10 @@ test("test filter of the table", async ({ page }) => {
     await page.locator("input-filter").getByPlaceholder("Age").clear();
     await page.locator("input-filter").getByPlaceholder("Age").fill(age);
     await page.waitForTimeout(500); // table doesn't have time to render with new data before going to next loop; we need to create an artificial timeout
+    // make screenshot
+    await page
+      .locator("nb-card")
+      .screenshot({ path: `screenshots/filteredTableScreenshot${age}.png` });
 
     const ageRows = page.locator("tbody tr");
     for (let row of await ageRows.all()) {
