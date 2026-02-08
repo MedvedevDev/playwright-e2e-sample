@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/pages/iot-dashboard");
 });
 
-test("navigation across all pages ", async ({ page }) => {
+test("navigation across all pages @regression @smoke", async ({ page }) => {
   const navigation = new NavigationPage(page);
   await navigation.toFormLayoutsPage();
   await navigation.toDatepickerPage();
@@ -17,7 +17,7 @@ test("navigation across all pages ", async ({ page }) => {
   await navigation.toTooltipPage();
 });
 
-test("parametrized methods. submit a form", async ({ page }) => {
+test("parametrized methods. submit a form @regression", async ({ page }) => {
   const navigation = new NavigationPage(page);
   const formLayoutsPage = new FormLayoutsPage(page);
 
@@ -31,7 +31,7 @@ test("parametrized methods. submit a form", async ({ page }) => {
   await formLayoutsPage.submitInlineForm(fullName, email, true);
 });
 
-test("test datepicker", async ({ page }) => {
+test("test datepicker @regression", async ({ page }) => {
   const navigation = new NavigationPage(page);
   const datepickerPage = new DatepickerPage(page);
 
